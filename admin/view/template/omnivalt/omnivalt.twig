@@ -57,7 +57,6 @@
          
         {% set variable = nOrder['tracking']|slice(0,30) %}
         
-        {{ dump(variable) }}
         {{variable}}
         {% set labelsNumb = variable | length %}
         {% set numb  = nOrder['labelscount']|length %}
