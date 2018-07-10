@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Admin order list buttons</id>
+    <version>1.0.0</version>
+    <vqmver required="true">2.5.0</vqmver>
+    <author></author>
+    <file name="admin/view/template/sale/order_info.twig">
+        <operation>
+            <search position="ibefore"><![CDATA[
+                <a href="{{ invoice }}" target="_blank" data-toggle="tooltip" title="{{ button_invoice_print }}" class="btn btn-info"><i class="fa fa-print"></i></a>            ]]></search>
+            <add><![CDATA[
+                <a href="{{ omnivalt_label }}" target="_blank" data-toggle="tooltip" title="{{ generate_labels }}" class="btn btn-warning"><i class="fa fa-barcode"></i></a>
+            ]]></add>
+        </operation>
+          <operation>
+            <search position="ibefore"><![CDATA[<h3 class="panel-title"><i class="fa fa-user"></i> {{ text_customer_detail }}</h3>]]></search>
+              <add><![CDATA[
+              {% if 'omnivalt' in orderCarrier %}
+              <form method="POST" action="{{ editOmniva }}" >
+              <input type="hidden" value="{{ order_id }}" name="order_id">
+              <h3 class="panel-title"><i class="fa fa-info-circle"></i> {{ heading_title }}</h3>
+              </div>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td colspan="2">{{labels_count }}
+                      <select name="labelsCount" id="labelsCount" class="form-control input-sm">
+                          <option value="1" selected="">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                      </select>
+                    <td colspan="2">
+                      {{ weight }} <input type="number" step="0.0001" name="omnivaWeight" class="form-control input-sm" value="{{ omnivaWeight }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">C.O.D 
+                      <select name="cod_available" class="form-control input-sm">
+                        <option value="0">Ne</option>
+                        <option value="1" {% if (payment_code == 'cod' or cod_amount > 0) and cod_amount != 888888 %} selected="" {% endif %}>Taip</option>         
+                      </select>              
+                    </td>
+                    <td colspan="2">
+                      {{text_cod_amount }}
+                        <input type="text" name="cod_value" class="form-control input-sm" value="{% if cod_amount and cod_amount != 888888 %} {{ cod_amount }} {% else %} {{ orderTotal }} {% endif %}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="4">{{delivery_method }}
+                      <select name="delivery_method" class="form-control input-sm">
+                        <option disabled>Select labels count</option>
+                        <option value="omnivalt.courier|OmnivaLt kurjeris">Omnivalt Courier</option>
+                        {{ parcel_terminals }}
+                    </select>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="submit" name="update" class="btn btn-default btn-sm" value="{{renew }}">
+          <input type="submit" name="generateLabel" class="btn btn-default btn-sm" value="{{generate_label }}">
+      </div>
+      </form>
+      <div class="panel panel-default">
+      <div class="panel-heading">
+      {% endif %}
+      ]]></add>
+      </operation>
+   </file>
+</modification>

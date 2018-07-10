@@ -1,0 +1,313 @@
+{{ header}}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-omnivalt" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+        <a onclick="$('#download').val('1');$('#form-omnivalt').submit();" class="btn btn-default" data-toggle="tooltip" title="{{ button_download }}">{{ button_download }}</i></a>
+        </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-omnivalt" class="form-horizontal">
+          <input type="hidden" id="download" name="download" value=0 />
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-key">{{ entry_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_url" value="{{ shipping_omnivalt_url }}" placeholder="{{ entry_url }}" id="input-url" class="form-control" />
+              {% if error_url %}
+              <div class="text-danger">{{ error_url }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-key">{{ entry_user }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_user" value="{{ shipping_omnivalt_user }}" placeholder="{{ entry_user }}" id="input-key" class="form-control" />
+              {% if error_user %}
+              <div class="text-danger">{{ error_user }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>
+            <div class="col-sm-10">
+              <input type="password" name="shipping_omnivalt_password" value="{{ shipping_omnivalt_password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+              {% if error_password %}
+              <div class="text-danger">{{ error_password }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_name">{{ entry_sender_name }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_name" value="{{ shipping_omnivalt_sender_name }}" placeholder="{{ entry_sender_name }}" id="input-" class="form-control" />
+              {% if error_sender_name %}
+              <div class="text-danger">{{ error_sender_name }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_address">{{ entry_sender_address }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_address" value="{{ shipping_omnivalt_sender_address }}" placeholder="{{ entry_sender_address }}" id="input-" class="form-control" />
+              {% if error_sender_address %}
+              <div class="text-danger">{{ error_sender_address }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_postcode">{{ entry_sender_postcode }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_postcode" value="{{ shipping_omnivalt_sender_postcode }}" placeholder="{{ entry_sender_postcode }}" id="input-" class="form-control" />
+              {% if error_sender_postcode %}
+              <div class="text-danger">{{ error_sender_postcode }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_city">{{ entry_sender_city }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_city" value="{{ shipping_omnivalt_sender_city }}" placeholder="{{ entry_sender_city }}" id="input-sender_city" class="form-control" />
+              {% if error_sender_city %}
+              <div class="text-danger">{{ error_sender_city }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_country_code">{{ entry_sender_country_code }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_country_code" value="{{ shipping_omnivalt_sender_country_code }}" placeholder="{{ entry_sender_country_code }}" id="input-sender_country_code" class="form-control" />
+              {% if error_sender_country_code %}
+              <div class="text-danger">{{ error_sender_country_code }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-sender_phone">{{ entry_sender_phone }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sender_phone" value="{{ shipping_omnivalt_sender_phone }}" placeholder="{{ entry_sender_phone }}" id="input-sender_phone" class="form-control" />
+              {% if error_sender_phone %}
+              <div class="text-danger">{{ error_sender_phone }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ entry_service }}</label>
+            <div class="col-sm-10">
+              <div class="well well-sm" style="height: 100px; overflow: auto;">
+                {% for service in services %}
+                <div class="checkbox">
+                  <label>
+                    {%  if service['value'] in shipping_omnivalt_service %}
+                    <input type="checkbox" name="shipping_omnivalt_service[]" value="{{ service['value'] }}" checked="checked" />
+                    {{ service['text'] }}
+                    {% else %}
+                    <input type="checkbox" name="shipping_omnivalt_service[]" value="{{ service['value'] }}" />
+                    {{ service['text'] }}
+                    {% endif %}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+          </div>
+          </div>
+
+
+<div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-parcel-terminal-price">{{ entry_parcel_terminal_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_parcel_terminal_price" value="{{ shipping_omnivalt_parcel_terminal_price }}" placeholder="{{ entry_parcel_terminal_price }}" id="input-parcel-terminal-price" class="form-control" />
+             </div>
+              {% if error_parcel_terminal_price %}
+              <div class="text-danger">{{ error_parcel_terminal_price }}</div>
+              {% endif %}
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-courier-price">{{ entry_courier_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_courier_price" value="{{ shipping_omnivalt_courier_price }}" placeholder="{{ entry_courier_price }}" id="input-parcel-terminal-price" class="form-control" />
+              {% if error_courier_price %}
+              <div class="text-danger">{{ error_courier_price }}</div>
+              {% endif %}
+             </div>
+          </div>
+          <!-- additional pricing EE, LV -->
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-parcel-terminal-pricelv">LV {{ entry_parcel_terminal_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_parcel_terminal_pricelv" value="{{ shipping_omnivalt_parcel_terminal_pricelv }}" placeholder="{{ entry_parcel_terminal_price }}" id="input-parcel-terminal-pricelv" class="form-control" />
+              {% if error_parcel_terminal_pricelv %}
+              <div class="text-danger">{{ error_parcel_terminal_pricelv }}</div>
+              {% endif %}
+             </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-courier-price">LV {{ entry_courier_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_courier_pricelv" value="{{ shipping_omnivalt_courier_pricelv }}" placeholder="{{ entry_courier_price }}" id="input-parcel-terminal-price" class="form-control" />
+              {% if error_courier_pricelv %}
+              <div class="text-danger">{{ error_courier_pricelv }}</div>
+              {% endif %}
+             </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-parcel-terminal-priceee">EE {{ entry_parcel_terminal_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_parcel_terminal_priceee" value="{{ shipping_omnivalt_parcel_terminal_priceee }}" placeholder="{{ entry_parcel_terminal_price }}" id="input-parcel-terminal-priceee" class="form-control" />
+              {% if error_parcel_terminal_priceee %}
+              <div class="text-danger">{{ error_parcel_terminal_priceee }}</div>
+              {% endif %}
+             </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-courier-price">EE {{ entry_courier_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_courier_priceee" value="{{ shipping_omnivalt_courier_priceee }}" placeholder="{{ entry_courier_price }}" id="input-parcel-terminal-price" class="form-control" />
+               {% if error_courier_priceee %}
+              <div class="text-danger">{{ error_courier_priceee }}</div>
+              {% endif %}
+             </div>
+          </div>
+          <!--/ Additional pricing -->
+
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-company">{{ entry_company }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_company" value="{{ shipping_omnivalt_company }}" placeholder="{{ entry_company }}" id="input-company" class="form-control" />
+             </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-bankaccount">{{ entry_bankaccount }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_bankaccount" value="{{ shipping_omnivalt_bankaccount }}" placeholder="{{ entry_bankaccount }}" id="input-bankaccount" class="form-control" />
+             </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-pickupstart">{{ entry_pickupstart }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_pickupstart" value="{{ shipping_omnivalt_pickupstart }}" placeholder="{{ entry_pickupstart }}" id="input-pickupstart" class="form-control" />
+             </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-pickupstart">{{ entry_pickupfinish }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_pickupfinish" value="{{ shipping_omnivalt_pickupfinish }}" placeholder="{{ entry_pickupfinish }}" id="input-pickupfinish" class="form-control" />
+             </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-pickup-type">{{ entry_pickup_type }}</label>
+            <div class="col-sm-10">
+              <select name="shipping_omnivalt_pickup_type" id="input-pickup-type" class="form-control">
+                {% if shipping_omnivalt_pickup_type == 'parcel_terminal' %}
+                <option value="parcel_terminal" selected="selected">{{ text_parcel_terminal }}</option>
+                {% else %}
+                <option value="parcel_terminal">{{ text_parcel_terminal }}</option>
+                {% endif %}
+                {% if shipping_omnivalt_pickup_type == 'courier' %}
+                <option value="courier" selected="selected">{{ text_courier }}</option>
+                {% else %}
+                <option value="courier">{{ text_courier }}</option>
+                {% endif %}
+                {% if shipping_omnivalt_pickup_type == 'sorting_center' %}
+                <option value="sorting_center" selected="selected">{{ text_sorting_center }}</option>
+                {% else %}
+                <option value="sorting_center">{{ text_sorting_center }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cod">{{ entry_cod }}</label>
+            <div class="col-sm-10">
+              <select name="shipping_omnivalt_cod" id="input-cod" class="form-control">
+                {% if shipping_omnivalt_cod %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="shipping_omnivalt_status" id="input-status" class="form-control">
+                {% if shipping_omnivalt_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="shipping_omnivalt_sort_order" value="{{ shipping_omnivalt_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+                    <label class="col-sm-2 control-label" for="terminals">{{ entry_terminals }}</label>
+                    <div class="col-sm-10" id="terminals">
+                        {{ terminal_count }}
+                    </div>
+          </div>
+          <div class="form-group">
+                    <label class="col-sm-2 control-label" for="terminals"><?=$cron_url;?></label>
+                    <div class="col-sm-10" id="terminals">
+                    <a href="{{ HTTPS_CATALOG }}index.php?route=extension/module/omnivalt"/>{{ HTTPS_CATALOG }}index.php?route=extension/module/omnivalt</a><br />
+                    Nuoroda galima naudoti automatiniam omnivalt terminalų atnaujinimui naudojant local serverio crontab funkcijas. 
+                    Arba jei tokios nėra - https://cron-job.org/en/ ir panašius servisus.
+                    </div>
+          </div>
+          <!-- Field for email templates -->
+            <div class="form-group">
+                    <label class="col-sm-2 control-label" for="terminals">Email templates <Br />
+                    Enabled/Disabled 
+                    <input 
+                    {% if shipping_omnivalt_enable_templates == 'on' %}  'checked' {% endif %}
+                    type="checkbox"
+                    name="shipping_omnivalt_enable_templates">
+                    <Br />(Email will be sent then first label is generated.)
+                    </label>
+                    <div class="col-sm-10" id="terminals">
+                      <textarea 
+                      class="form-control" rows="5" 
+                      name="shipping_omnivalt_email_template"
+                      placeholder="Text to send then parcel is sent.">
+                      {{ shipping_omnivalt_email_template }}
+                      </textarea>
+                    </div>
+                  </div>
+            <!--/ Field for email templates -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

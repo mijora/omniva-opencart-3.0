@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Admin order controller new variables</id>
+    <version>1.0.0</version>
+    <vqmver required="true">2.5.0</vqmver>
+    <author></author>
+    <file name="admin/controller/sale/order.php">
+        <operation>
+            <search position="iafter"><![CDATA[
+            $data['shipping'] = $this->url->link('sale/order/shipping', 'user_token=' . $this->session->data['user_token'], true);
+            ]]></search>
+            <add><![CDATA[
+                $data['omnivalt_label'] = $this->url->link('omnivalt/omnivaltPrints/labels', 'user_token=' . $this->session->data['user_token'], true);
+                $this->load->language('extension/shipping/omnivalt');
+                $data['generate_labels']   =$this->language->get('generate_labels');
+                $data['text_manifest']   =$this->language->get('print_manifest');
+                $data['omnivalt_manifest'] = $this->url->link('omnivalt/omnivaltPrints/manifest', 'user_token=' . $this->session->data['user_token'], true);
+            
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="iafter"><![CDATA[
+            $data['invoice'] = $this->url->link('sale/order/invoice', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . (int)$this->request->get['order_id'], true);		
+            ]]></search>
+            <add><![CDATA[
+            $data['omnivalt_label'] = $this->url->link('omnivalt/omnivaltPrints/labels', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . (int)$this->request->get['order_id'], true);		    
+            $data['omnivalt_label_print'] = $this->url->link('omnivalt/omnivaltPrints/labelsprint', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . (int)$this->request->get['order_id'], true);		              
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="iafter"><![CDATA[$data['payment_method'] = $order_info['payment_method'];]]></search>
+            <add><![CDATA[
+            			/* Additional field */
+			$data['orderCarrier'] = $order_info['shipping_code'];
+			$data['labelsCount'] = $order_info['labelsCount'];
+			$data['omnivaWeight'] = $order_info['omnivaWeight'];
+			$data['cod_amount'] = $order_info['cod_amount'];
+			$data['omniva_terminals'] = $this->config->get('omnivalt_terminals_LT');
+			$data['shipping_code'] = $order_info['shipping_code'];
+			$data['editOmniva'] = $this->url->link('omnivalt/omnivaltPrints/editLabel', 'user_token=' . $this->session->data['user_token']. '&order_id='.$data['order_id'], true);
+			$data['payment_code'] = $order_info['payment_code'];
+			$data['orderTotal'] = $order_info['total'];
+
+            $data['parcel_terminals'] = null;
+            if(substr($order_info['shipping_code'], 0, 8) == 'omnivalt') {
+                $omniva_terminals = $this->config->get('omnivalt_terminals_LT');
+                $grouped_options = array();
+                $parcel_terminals = '';
+                $shipping_code = $order_info['shipping_code'];
+                    foreach ($omniva_terminals as $terminal){
+                        if (!isset($grouped_options[$terminal[1]]))
+                            $grouped_options[(string)$terminal[1]] = array();
+                            $grouped_options[(string)$terminal[1]][(string)$terminal[3]] = $terminal[0].', '.$terminal[2];  
+                        }
+                        foreach ($grouped_options as $city=>$locs){
+                            $parcel_terminals .= '<optgroup label = "'.$city.'">';
+                            foreach ($locs as $key=>$loc){
+                                $parcel_terminals .= '<option value = "omnivalt.parcel_terminal_'.$key.'|'.$loc.'" '.('omnivalt.parcel_terminal_'.$key == $shipping_code ?'selected':'').'>'.$loc.'</option>';
+                            }
+                             $parcel_terminals .= '</optgroup>';
+                        }
+                if ($parcel_terminals != '')
+                    $data['parcel_terminals'] = $parcel_terminals;
+            }
+
+
+
+            $this->load->language('extension/shipping/omnivalt');
+            $data['labels_count']   =$this->language->get('labels_count');
+            $data['weight']   =$this->language->get('weight');
+            $data['delivery_method']   =$this->language->get('delivery_method');
+            $data['generate_labels']   =$this->language->get('generate_labels');
+            $data['text_cod_amount']   =$this->language->get('cod_amount');
+            $data['generate_label']   =$this->language->get('generate_label');
+            $data['renew']   =$this->language->get('renew');
+             ]]></add>
+        </operation>
+    </file>
+</modification>

@@ -1,0 +1,182 @@
+---------- Date: 2018-07-09 12:06:13 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:06:19 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=common/dashboard&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_menu.xml
+   id        : Admin order controller new variables
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+
+File Name    : admin/controller/common/column_left.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $extension = array();
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:06:30 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=sale/order&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order_controller.xml
+   id        : Admin order controller new variables
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+
+File Name    : admin/controller/sale/order.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'], true);
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:22:07 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=extension/shipping/omnivalt&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:23:26 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=extension/shipping/omnivalt&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:24:16 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=extension/shipping/omnivalt&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:30:49 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:31:13 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:32:54 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:36:14 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission/edit&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq&user_group_id=1
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:36:51 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission/edit&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq&user_group_id=1
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:37:09 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=user/user_permission/edit&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq&user_group_id=1
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2018-07-09 12:39:02 ~ IP : ::1 ----------
+REQUEST URI : /opencart30/upload/admin/index.php?route=marketplace/marketplace&user_token=U8XZc1gZrdYrUSsPrruZoaGDQzcr9eXq
+MOD DETAILS:
+   modFile   : /var/www/html/opencart30/upload/vqmod/xml/vqmod_omnivalt_admin_order.xml
+   id        : Admin order list buttons
+   version   : 1.0.0
+   vqmver    : 2.5.0
+   author    : 
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_list.tpl] (SKIPPED)
+VQModObject::parseMods - Could not resolve path for [admin/view/template/sale/order_info.tpl] (SKIPPED)
+
+----------------------------------------------------------------------
+
+

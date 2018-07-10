@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Admin order list buttons</id>
+    <version>1.0.0</version>
+    <vqmver required="true">2.5.0</vqmver>
+    <author></author>
+    <file name="admin/view/template/sale/order_list.twig">
+        <operation>
+            <search position="ibefore"><![CDATA[<button type="button" data-toggle="tooltip" title="{{ button_filter }}"]]></search>
+            <add><![CDATA[
+                <button type="submit" id="button-omnivalt-labels" form="form-order" formaction="{{ omnivalt_label }}" formtarget="_blank" data-toggle="tooltip" title="{{ generate_labels }}" class="btn btn-warning"><i class="fa fa-barcode"></i></button>
+                <button type="submit" id="button-omnivalt-manifests" form="form-order" formaction="{{ omnivalt_manifest }}" formtarget="_blank" data-toggle="tooltip" title="{{ text_manifest }}" class="btn btn-info"><i class="fa fa-file-text"></i></button>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="iafter"><![CDATA[<td class="text-left">{{ order.customer }}]]></search>
+            <add><![CDATA[
+            {% if 'omnivalt' in order["shipping_code"] %}
+            <img src="/admin/view/image/omniva-lt.png" alt="Omniva LT" height="20">
+            {% endif %}
+            ]]></add>
+        </operation>
+    </file>
+    <file name="admin/model/sale/order.php">
+        <operation>
+            <search position="iafter"><![CDATA[ $order_query->row['date_modified']]]></search>
+            <add><![CDATA[
+                ,'labelsCount'           => $order_query->row['labelsCount'],
+                'omnivaWeight'           => $order_query->row['omnivaWeight'],
+                'cod_amount'             => $order_query->row['cod_amount']
+            ]]></add>
+        </operation>
+    </file>
+</modification>
