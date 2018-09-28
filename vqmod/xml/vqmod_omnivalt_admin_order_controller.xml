@@ -39,7 +39,9 @@
 			$data['shipping_code'] = $order_info['shipping_code'];
 			$data['editOmniva'] = $this->url->link('omnivalt/omnivaltPrints/editLabel', 'user_token=' . $this->session->data['user_token']. '&order_id='.$data['order_id'], true);
 			$data['payment_code'] = $order_info['payment_code'];
-			$data['orderTotal'] = $order_info['total'];
+			/* $data['orderTotal'] = $order_info['total']; */
+            $data['orderTotal'] = floatval($this->currency->format($order_info['total'], $this->config->get('config_currency')));
+
 
             $data['parcel_terminals'] = null;
             if(substr($order_info['shipping_code'], 0, 8) == 'omnivalt') {

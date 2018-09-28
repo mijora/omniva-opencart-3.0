@@ -427,9 +427,9 @@ class ControllerOmnivaltOmnivaltAPI extends Controller
 
     private function cod($order, $cod = 0, $amount = 0)
     {
-        $company = $this->config->get('omnivalt_company');
-        $bank_account = $this->config->get('omnivalt_bankaccount');
-        $setting_cod = $this->config->get('omnivalt_cod');
+        $company = $this->config->get('shipping_omnivalt_company');
+        $bank_account = $this->config->get('shipping_omnivalt_bankaccount');
+        $setting_cod = $this->config->get('shipping_omnivalt_cod');
         if ($cod) {
             return '<monetary_values>
                     <cod_receiver>' . $company . '</cod_receiver>
