@@ -198,31 +198,31 @@ class ControllerOmnivaltOmnivalt extends Controller
          <soapenv:Header/>
          <soapenv:Body>
             <xsd:businessToClientMsgRequest>
-               <partner>' . $this->config->get('omnivalt_user') . '</partner>
+               <partner>' . $this->config->get('shipping_omnivalt_user') . '</partner>
                <interchange msg_type="info11">
-                  <header file_id="' . \Date('YmdHms') . '" sender_cd="' . $this->config->get('omnivalt_user') . '" >
+                  <header file_id="' . \Date('YmdHms') . '" sender_cd="' . $this->config->get('shipping_omnivalt_user') . '" >
                   <comment>We are ready to pick</comment>
                   </header>
                   <item_list>
                      <item service="QH" >
                         <measures weight="18" />
                         <receiverAddressee >
-                            <person_name>' . $this->config->get('omnivalt_sender_name') . '</person_name>
-                            <phone>' . $this->config->get('omnivalt_sender_phone') . '</phone>
-                            <address postcode="' . $this->config->get('omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('omnivalt_sender_city') . '" country="' . $this->config->get('omnivalt_sender_country_code') . '" street="' . $this->config->get('omnivalt_sender_address') . '" />
+                            <person_name>' . $this->config->get('shipping_omnivalt_sender_name') . '</person_name>
+                            <phone>' . $this->config->get('shipping_omnivalt_sender_phone') . '</phone>
+                            <address postcode="' . $this->config->get('shipping_omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('shipping_omnivalt_sender_city') . '" country="' . $this->config->get('shipping_omnivalt_sender_country_code') . '" street="' . $this->config->get('shipping_omnivalt_sender_address') . '" />
                         </receiverAddressee>
                         <!--Optional:-->
                         <returnAddressee>
-                           <person_name>' . $this->config->get('omnivalt_sender_name') . '</person_name>
+                           <person_name>' . $this->config->get('shipping_omnivalt_sender_name') . '</person_name>
                            <!--Optional:-->
-                           <phone>' . $this->config->get('omnivalt_sender_phone') . '</phone>
-                           <address postcode="' . $this->config->get('omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('omnivalt_sender_city') . '" country="' . $this->config->get('omnivalt_sender_country_code') . '" street="' . $this->config->get('omnivalt_sender_address') . '" />
+                           <phone>' . $this->config->get('shipping_omnivalt_sender_phone') . '</phone>
+                           <address postcode="' . $this->config->get('shipping_omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('shipping_omnivalt_sender_city') . '" country="' . $this->config->get('shipping_omnivalt_sender_country_code') . '" street="' . $this->config->get('shipping_omnivalt_sender_address') . '" />
                         </returnAddressee>
                     <onloadAddressee>
-                        <person_name>' . $this->config->get('omnivalt_sender_name') . '</person_name>
+                        <person_name>' . $this->config->get('shipping_omnivalt_sender_name') . '</person_name>
                         <!--Optional:-->
-                        <phone>' . $this->config->get('omnivalt_sender_phone') . '</phone>
-                        <address postcode="' . $this->config->get('omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('omnivalt_sender_city') . '" country="' . $this->config->get('omnivalt_sender_country_code') . '" street="' . $this->config->get('omnivalt_sender_address') . '" />
+                        <phone>' . $this->config->get('shipping_omnivalt_sender_phone') . '</phone>
+                        <address postcode="' . $this->config->get('shipping_omnivalt_sender_postcode') . '" deliverypoint="' . $this->config->get('shipping_omnivalt_sender_city') . '" country="' . $this->config->get('shipping_omnivalt_sender_country_code') . '" street="' . $this->config->get('shipping_omnivalt_sender_address') . '" />
                        <pick_up_time start="' . date("c", strtotime($pickDay . ' ' . $pickStart)) . '" finish="' . date("c", strtotime($pickDay . ' ' . $pickFinish)) . '"/>
                      </onloadAddressee>
                      </item>
@@ -231,8 +231,11 @@ class ControllerOmnivaltOmnivalt extends Controller
             </xsd:businessToClientMsgRequest>
          </soapenv:Body>
       </soapenv:Envelope>';
-        //$response = $this->load->controller('extension/shipping/omnivalt/api_request', $xmlRequest);
-        $response['status'] = true;
+//      $response = $this->load->controller('extension/shipping/omnivalt/api_request', $xmlRequest);
+
+        $response = $this->load->controller('omnivalt/omnivaltAPI/api_request', $xmlRequest);
+        //$response['status'] = true;
+        //var_dump($xmlRequest, $response);
         if ($response['status']) {
             return $this->response->setOutput('got_request');
         } else {
