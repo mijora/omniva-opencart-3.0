@@ -9,7 +9,6 @@ class ModelExtensionShippingOmnivalt extends Model
     public function getQuote($address)
     {
         
-        //return array();
         $currency_carrier = "EUR";
         $total_kg = $this->cart->getWeight();
         $weight_class_id = $this->config->get('config_weight_class_id');
@@ -21,6 +20,7 @@ class ModelExtensionShippingOmnivalt extends Model
         $this->load->language('extension/shipping/omnivalt');
 
         $method_data = array();
+        $method_data2 = array();
         $service_Actives = $this->config->get('shipping_omnivalt_service');
 
         if (is_array($service_Actives) && count($service_Actives) && ($address['iso_code_2'] == 'LT' || 
@@ -78,7 +78,8 @@ class ModelExtensionShippingOmnivalt extends Model
                         return ($a[0] < $b[0]) ? -1 : 1;
                     }
                         return ($a[1] < $b[1]) ? -1 : 1;});
-                    $cabine_select2 .= $this->groupTerminals($cabins, $address['iso_code_2']);
+                    $terminal_options = $this->groupTerminals($cabins, $address['iso_code_2']);    
+                    $cabine_select2 .= $terminal_options;
                     $terminalsArr = array();
 
                     foreach ($cabins as $cabin) {
@@ -100,28 +101,27 @@ class ModelExtensionShippingOmnivalt extends Model
                                                                                         $this->session->data['currency']), 
                                                                 $this->session->data['currency']),
                         );
-                  
-/*
-                        $sub_quote2['parcel_terminal_fake' . $cabin[3]] = array(
-                            'code' => 'omnivalt.parcel_terminal_fake' . $cabin[3],
-                            'title' => '<div id="parcel_terminal_fake' . $cabin[3] . '"></div>',
-                            'cost' => $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency')),
-                            'tax_class_id' => 0,
-                            'text' => 'fake',
-                        );*/
                         
                     }
                     $cabine_select2 .= '</select>';
+                    $cabine_select2 .= '
+                    <button type="button" id="show-omniva-map" class="btn btn-basic btn-sm omniva-btn"><i id="show-omniva-map" class="fa fa-map-marker-alt fa-lg" aria-hidden="true"></i></button>
+                    ';
                 }
                 
                 $codeCarrier = "omnivalt";
                 if ($service_Active == "parcel_terminal") {
                     $codeCarrier = 'fake';
                 }
+                if(isset($terminal_options))
+                  $terminalOpt = $this->groupTerminals($cabins);
+                else
+                  $terminalOpt = null;
 
                 $quote_data2[$service_Active] = array(
                     'code' => $codeCarrier . '.' . $service_Active,
                     'title' => $title . $cabine_select2,
+                    'terminals' => $terminalOpt,
                     'cost' => $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency')),
                     'tax_class_id' => 0,
                     'sort_order' => $this->config->get('shipping_omnivalt_sort_order'),
@@ -151,6 +151,7 @@ class ModelExtensionShippingOmnivalt extends Model
         }
         return $method_data2;
     }
+
     private function groupTerminals($terminals, $country = 'LT', $selected = '')
     {
         $parcel_terminals = '';
@@ -168,14 +169,12 @@ class ModelExtensionShippingOmnivalt extends Model
             foreach ($grouped_options as $city => $locs) {
                 $parcel_terminals .= '<optgroup label = "' . $city . '">';
                 foreach ($locs as $key => $loc) {
-                    $parcel_terminals .= '<option value = "omnivalt.parcel_terminal_' . $key . '" ' . ($key == $selected ? 'selected' : '') . '>' . $loc . '</option>';
+                    $parcel_terminals .= '<option class="omnivaOption" value = "omnivalt.parcel_terminal_' . $key . '" ' . ($key == $selected ? 'selected' : '') . '>' . $loc . '</option>';
                 }
                 $parcel_terminals .= '</optgroup>';
             }
         }
-        $parcel_terminals = '<option value = "" selected disabled>' . $this->language->get('text_select_terminal') . '</option>' . $parcel_terminals;
+        $parcel_terminals = '<option selected value = "" disabled>' . $this->language->get('text_select_terminal') . '</option>' . $parcel_terminals;
         return $parcel_terminals;
     }
-
-    
 }
