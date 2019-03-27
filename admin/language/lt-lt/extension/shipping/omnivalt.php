@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                            = 'Omnivalt';
+$_['heading_title']                            = 'Omniva';
 // Text
 $_['text_shipping']                            = 'Siuntimas';
 $_['text_success']                             = 'Atlikta: redagavimas baigtas!';
