@@ -81,3 +81,15 @@ $_['text_new_zero']         = 'Nothing to show, skipped orders count is zero!!!'
 $_['text_start_search']     = 'Užpildykite laukus pradėti paiešką.';
 $_['text_start_search']     = 'Fill fields to start search.';
 
+
+$_['text_email_templates']  = '(emails are sent  with first generatedlabel only)';
+$_['text_enabled_disabled'] = 'Enabled/Disabled';
+$_['text_email_templates_head'] = 'Email templates';
+
+$_['text_courier_call']        = 'Final parcel, courier call.';
+$_['text_omniva_important']    = 'Important!';
+$_['text_latest_courier_call'] = 'The latest available courier call is up to 15:00. Later on, the courier does not guarantee that the shipment will be taken.';
+$_['text_eshop_settings']      = 'E-shop address settings';
+$_['text_eshop_settings_p']    = 'can be changed in the Omnivalt module settings.';
+$_['text_omniva_data_send']    = 'Sending data';
+$_['text_omniva_not_found']    = 'Nothing found.';

@@ -108,19 +108,19 @@ class ModelExtensionShippingOmnivalt extends Model
                     <button type="button" id="show-omniva-map" class="btn btn-basic btn-sm omniva-btn"><i id="show-omniva-map" class="fa fa-map-marker-alt fa-lg" aria-hidden="true"></i></button>
                     ';
                 }
-                
                 $codeCarrier = "omnivalt";
                 if ($service_Active == "parcel_terminal") {
                     $codeCarrier = 'fake';
                 }
                 if(isset($terminal_options))
-                  $terminalOpt = $this->groupTerminals($cabins);
+                  $terminalOpt = $this->groupTerminals($cabins, $address['iso_code_2']);
                 else
                   $terminalOpt = null;
 
                 $quote_data2[$service_Active] = array(
                     'code' => $codeCarrier . '.' . $service_Active,
                     'title' => $title . $cabine_select2,
+                    'head' => $title,
                     'terminals' => $terminalOpt,
                     'cost' => $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency')),
                     'tax_class_id' => 0,

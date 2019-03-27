@@ -294,7 +294,7 @@ class ControllerExtensionShippingOmnivalt extends Controller
         }
         $countries = array();
         $countries['LT'] = 1;
-        //$countries['LV'] = 2;
+        $countries['LV'] = 2;
         //$countries['EE'] = 3;
         $cabins = $this->parseCSV($csv, $countries);
         if ($cabins) {
@@ -316,6 +316,7 @@ class ControllerExtensionShippingOmnivalt extends Controller
         if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200) {
             die('cannot fetch update from ' . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . ': ' . curl_getinfo($ch, CURLINFO_HTTP_CODE));
         }
+
         curl_close($ch);
         return $out;
     }
