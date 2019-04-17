@@ -47,7 +47,7 @@ $_['menu_head']             = 'Omniva';
 $_['menu_manifest']         = 'Pasūtījumi';
 $_['menu_settings']         = 'Iestatījumi';
 // orders
-$_['generate_labels']       = 'Ģenerēt Omniva adrešu kartes';
+$_['generate_labels']       = 'Drukāt adrešu karti';
 $_['print_manifest']        = 'Drukāt Omnivalv sūtījumu sarakstu';
 $_['labels_count']          = 'Adrešu karšu skaits';
 $_['weight']                = 'Svars';
@@ -67,7 +67,7 @@ $_['text_total']            = 'Kopā';
 $_['text_skip_order']       = 'Izlaist pasūtījumu';
 $_['text_add_order']        = 'Pievienot sūtījumu sarakstam';
 $_['text_tracking_num']     = 'Izekošanas numurs';
-$_['generate_label']        = 'Ģenerēt adrešu kartes';
+$_['generate_label']        = 'Drukāt adrešu karti';
 $_['text_skipped_zero']     = 'Nav datu, izlaisto pasūtījumu skaits ir nulle!!!';
 $_['text_new_zero']         = 'Nav datu, pasūtījumu skaits ir nulle!!!';
 $_['text_start_search']     = 'Aizpildiet laukus, lai sāktu meklēšanu.';
