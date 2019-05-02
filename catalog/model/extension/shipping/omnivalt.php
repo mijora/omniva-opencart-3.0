@@ -21,6 +21,7 @@ class ModelExtensionShippingOmnivalt extends Model
 
         $method_data = array();
         $method_data2 = array();
+        $sub_quote2 = array();
         $service_Actives = $this->config->get('shipping_omnivalt_service');
 
         if (is_array($service_Actives) && count($service_Actives) && ($address['iso_code_2'] == 'LT' || 
