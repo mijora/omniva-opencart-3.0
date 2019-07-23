@@ -240,6 +240,7 @@
 
 .terminal-container {
   position: relative;
+  max-width: 500px;
 }
 
 .loading-overlay {
