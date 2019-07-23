@@ -65,15 +65,22 @@ class ModelExtensionShippingOmnivalt extends Model
                     continue;
                 }
                 
+                if ($this->request->server['HTTPS']) {
+                    $server = $this->config->get('config_ssl');
+                } else {
+                    $server = $this->config->get('config_url');
+                }
+
                 $title = $this->language->get('text_' . $service_Active);
                 if ($service_Active == "parcel_terminal" && $cabins = $this->config->get('omnivalt_terminals_LT')) {
                     
                     $cabine_select2 = '<script>$( "input[name=shipping_method]" ).focus(function() { $( this ).blur(); });
                     $(".omniva_terminal_opt").parent().parent().hide();
                     </script>
+                    <div class="terminal-container" id="terminal-container" style="display:none;">
                     <select name="omnivalt_parcel_terminal" id="omnivalt_parcel_terminal"  class="form-control form-inline input-sm" style="width: 70%; display: inline;"
-                    onchange="$(\'#omnivalt_parcel_terminal\').parent().find(\'input\').eq(0).val($(this).val()); $(\'#omnivalt_parcel_terminal\').parent().find(\'input\').eq(0).prop(\'checked\',true);"
-                    onfocus="$(\'#omnivalt_parcel_terminal\').parent().find(\'input\').eq(0).prop(\'checked\',true);">';
+                    onchange="$(\'#terminal-container\').parent().find(\'input\').eq(0).val($(this).val()); $(\'#terminal-container\').parent().find(\'input\').eq(0).prop(\'checked\',true);"
+                    onfocus="$(\'#terminal-container\').parent().find(\'input\').eq(0).prop(\'checked\',true);">';
 
                     usort($cabins, function ($a, $b) {if ($a[1] == $b[1]) {
                         return ($a[0] < $b[0]) ? -1 : 1;
@@ -106,8 +113,10 @@ class ModelExtensionShippingOmnivalt extends Model
                     }
                     $cabine_select2 .= '</select>';
                     $cabine_select2 .= '
-                    <button type="button" id="show-omniva-map" class="btn btn-basic btn-sm omniva-btn"><i id="show-omniva-map" class="fa fa-map-marker-alt fa-lg" aria-hidden="true"></i></button>
-                    ';
+                        <button type="button" id="show-omniva-map" class="btn btn-basic omniva-btn">'.
+                        $this->language->get('text_omniva_show_map').
+                        '<img src = "'.$server.'/image/omniva/sasi.png" title = "'.$this->language->get('text_omniva_show_map').'"/>'.
+                        '</button></div>';
                 }
                 $codeCarrier = "omnivalt";
                 if ($service_Active == "parcel_terminal") {
