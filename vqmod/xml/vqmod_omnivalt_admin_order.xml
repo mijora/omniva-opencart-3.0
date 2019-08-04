@@ -16,7 +16,7 @@
             <search position="iafter"><![CDATA[<td class="text-left">{{ order.customer }}]]></search>
             <add><![CDATA[
             {% if 'omnivalt' in order["shipping_code"] %}
-            <img src="/admin/view/image/omniva-lt.png" alt="Omniva LT" height="20">
+            <img src="./view/image/omniva-lt.png" alt="Omniva LT" height="20">
             {% endif %}
             ]]></add>
         </operation>
@@ -27,7 +27,8 @@
             <add><![CDATA[
                 ,'labelsCount'           => $order_query->row['labelsCount'],
                 'omnivaWeight'           => $order_query->row['omnivaWeight'],
-                'cod_amount'             => $order_query->row['cod_amount']
+                'cod_amount'             => $order_query->row['cod_amount'],
+                'omniva_image_url'       => HTTPS_SERVER . 'view/image/omniva-lt.png'
             ]]></add>
         </operation>
     </file>
