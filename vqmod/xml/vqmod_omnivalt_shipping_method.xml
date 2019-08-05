@@ -7,8 +7,12 @@
     <file path="catalog/view/theme/*/template/checkout/shipping_method.twig" error="log">
     <operation>
         <search><![CDATA[{% for shipping_method in shipping_methods %}]]></search>
-        <add position="iafter"><![CDATA[
-        {% if shipping_method.title == "Omniva lt" %}
+        <add position="replace"><![CDATA[{% for method_key, shipping_method in shipping_methods %}]]></add>
+    </operation>
+    <operation>
+        <search><![CDATA[<p><strong>{{ shipping_method.title }}</strong></p>]]></search>
+        <add position="before"><![CDATA[
+        {% if method_key == "omnivalt" %}
         <script>
         $(document).ready(function () {
       var omnivaModuleReady = false;
@@ -69,6 +73,8 @@
 							$method['terminals'] = null;
               $shipping_method = $method;
 						}
+					} else { // courier
+						$shipping_method = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
 					}
 				} else {
           $shipping_method = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
