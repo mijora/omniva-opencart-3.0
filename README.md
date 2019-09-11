@@ -1,3 +1,6 @@
+There is ocmod version of this module that does not require vqmod. You can find it here:
+https://github.com/mijora/omniva-opencart-3.0-ocmod
+
 /**
  * Omniva opencart delivery module readme for usage and instalation guide
  * Module is installed throught vqmod https://github.com/vqmod/vqmod/wiki
