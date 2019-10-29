@@ -233,14 +233,14 @@ class ControllerExtensionShippingOmnivalt extends Controller
         } else {
             $data['shipping_omnivalt_sort_order'] = $this->config->get('shipping_omnivalt_sort_order');
         }
-        $data['shipping_omnivalt_terminals'] = $this->config->get('omnivalt_terminals_LT');
+        $data['shipping_omnivalt_terminals'] = $this->loadTerminals();
         if(isset($data['shipping_omnivalt_terminals'])) 
-            $data['terminal_count'] = count($this->config->get('omnivalt_terminals_LT'));
+            $data['terminal_count'] = count($data['shipping_omnivalt_terminals']);
          else
             $data['terminal_count'] = 1;
-            foreach($this->model_setting_setting->getSetting('shipping_omnivalt_terminals_LT') as $key => $value) {
-                echo $key;
-            }
+            // foreach($this->model_setting_setting->getSetting('shipping_omnivalt_terminals_LT') as $key => $value) {
+            //     echo $key;
+            // }
         if (isset($this->request->post['shipping_omnivalt_email_template'])) {
             $data['shipping_omnivalt_email_template'] = $this->request->post['shipping_omnivalt_email_template'];
         } else {
@@ -285,6 +285,20 @@ class ControllerExtensionShippingOmnivalt extends Controller
         return !$this->error;
     }
 
+    private function loadTerminals()
+    {
+        $terminals_json_file_dir = DIR_DOWNLOAD."omniva_terminals.json";
+        if (!file_exists($terminals_json_file_dir))
+        return false;
+        $terminals_file = fopen($terminals_json_file_dir, "r");
+        if (!$terminals_file)
+        return false;
+        $terminals = fread($terminals_file, filesize($terminals_json_file_dir) + 10);
+        fclose($terminals_file);
+        $terminals = json_decode($terminals, true);
+        return $terminals;
+    }
+
     private function fetchUpdates()
     {
         $terminals = array();
@@ -295,12 +309,14 @@ class ControllerExtensionShippingOmnivalt extends Controller
         $countries = array();
         $countries['LT'] = 1;
         $countries['LV'] = 2;
-        //$countries['EE'] = 3;
+        $countries['EE'] = 3;
         $cabins = $this->parseCSV($csv, $countries);
         if ($cabins) {
             $terminals = $cabins;
+            $fp = fopen(DIR_DOWNLOAD."omniva_terminals.json", "w");
+            fwrite($fp, json_encode($terminals));
+            fclose($fp);
         }
-        $this->model_setting_setting->editSetting('omnivalt_terminals', array('omnivalt_terminals_LT' => $terminals));
         $this->csvTerminal();
     }
     private function fetchURL($url)
