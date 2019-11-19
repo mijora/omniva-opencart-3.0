@@ -11,12 +11,12 @@ class ControllerExtensionShippingOmnivalt extends Controller
 
     public function install()
     {
-        $sql = "ALTER TABLE " . DB_PREFIX . "order ADD `labelsCount` INT NOT NULL DEFAULT '1',
+        $sql = "ALTER TABLE `" . DB_PREFIX . "order` ADD `labelsCount` INT NOT NULL DEFAULT '1',
                                               ADD `omnivaWeight` FLOAT NOT NULL DEFAULT '1',
                                               ADD `cod_amount` FLOAT DEFAULT 0;";
         $this->db->query($sql);
         $this->load->model('setting/setting');
-        $sql2 = "CREATE TABLE " . DB_PREFIX . "order_omniva (id int NOT NULL AUTO_INCREMENT, tracking TEXT, manifest int, labels text, id_order int, PRIMARY KEY (id), UNIQUE (id_order));";
+        $sql2 = "CREATE TABLE `" . DB_PREFIX . "order_omniva` (id int NOT NULL AUTO_INCREMENT, tracking TEXT, manifest int, labels text, id_order int, PRIMARY KEY (id), UNIQUE (id_order));";
         $this->model_setting_setting->editSetting('omniva', array('omniva_manifest' => 0));
         $this->db->query($sql2);
         //$this->model_setting_setting->editSetting('shipping_omniva', array('shipping_omnivalt_terminals_LT' => null));
@@ -24,12 +24,12 @@ class ControllerExtensionShippingOmnivalt extends Controller
 
     public function uninstall()
     {
-        $sql = "ALTER TABLE " . DB_PREFIX . "order DROP COLUMN labelsCount,
+        $sql = "ALTER TABLE `" . DB_PREFIX . "order` DROP COLUMN labelsCount,
                                         DROP COLUMN omnivaWeight,
                                         DROP COLUMN cod_amount; ";
 
         $this->db->query($sql);
-        $sql2 = "DROP TABLE " . DB_PREFIX . "order_omniva";
+        $sql2 = "DROP TABLE `" . DB_PREFIX . "order_omniva`";
         $this->db->query($sql2);
 
     }
