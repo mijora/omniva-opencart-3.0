@@ -16,7 +16,7 @@ class ControllerOmnivaltOmnivaltPrints extends Controller
 
     private function getOrderWeight($order_id)
     {
-        $query = $this->db->query("SELECT SUM(IF(wcd.unit ='g',(p.weight/1000),p.weight) * op.quantity) AS weight FROM " . DB_PREFIX . "order_product op LEFT JOIN " . DB_PREFIX . "product p ON op.product_id = p.product_id LEFT JOIN " . DB_PREFIX . "weight_class_description wcd ON wcd.weight_class_id = p.weight_class_id AND wcd.language_id = '" . (int) $this->config->get('config_language_id') . "' WHERE op.order_id = '" . (int) $order_id . "'");
+        $query = $this->db->query("SELECT SUM(IF(wcd.unit ='g',(p.weight/1000),p.weight) * op.quantity) AS weight FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "product` p ON op.product_id = p.product_id LEFT JOIN `" . DB_PREFIX . "weight_class_description` wcd ON wcd.weight_class_id = p.weight_class_id AND wcd.language_id = '" . (int) $this->config->get('config_language_id') . "' WHERE op.order_id = '" . (int) $order_id . "'");
         if ($query->row['weight']) {
             $weight = $query->row['weight'];
         } else {
@@ -35,7 +35,7 @@ class ControllerOmnivaltOmnivaltPrints extends Controller
     private function setOmnivaOrder($id_order = '', $tracking = '', $label = '')
     {
         $this->sendNotification($id_order);
-        $isPrinted = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_omniva WHERE id_order=" . $id_order . ";");
+        $isPrinted = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_omniva` WHERE id_order=" . $id_order . ";");
         $manifest = $this->config->get('omniva_manifest');
 
         if ($isPrinted->num_rows > 0) {
@@ -45,11 +45,11 @@ class ControllerOmnivaltOmnivaltPrints extends Controller
             }
             array_unshift($trackingArr, $tracking);
 
-            $this->db->query("UPDATE " . DB_PREFIX . "order_omniva SET tracking='" . json_encode($trackingArr) . "' WHERE id_order=" . $id_order . ";");
+            $this->db->query("UPDATE `" . DB_PREFIX . "order_omniva` SET tracking='" . json_encode($trackingArr) . "' WHERE id_order=" . $id_order . ";");
         } else if ($isPrinted->num_rows == 0) {
             $tracking = array($tracking);
             $tracking = json_encode($tracking);
-            $this->db->query("INSERT INTO " . DB_PREFIX . "order_omniva (tracking, manifest, labels, id_order)
+            $this->db->query("INSERT INTO `" . DB_PREFIX . "order_omniva` (tracking, manifest, labels, id_order)
       VALUES ('$tracking','$manifest','$label','$id_order')");
             if ($this->config->get('omnivalt_enable_templates') == 'on') {
                 $this->sendNotification();
@@ -532,25 +532,25 @@ class ControllerOmnivaltOmnivaltPrints extends Controller
             $delivery_method = $delivery_method[0];
 
             if ($cod_available == 1 && $cod_value > 0) {
-                $sql = "UPDATE " . DB_PREFIX . "order SET labelsCount = $labelsCount ,
+                $sql = "UPDATE `" . DB_PREFIX . "order` SET labelsCount = $labelsCount ,
                                                 omnivaWeight = $omnivaWeight ,
                                                 shipping_code = '" . $delivery_method . "' ,
                                                 shipping_method = '" . $delivery_methodName . "',
                                                 cod_amount = $cod_value
                                                 WHERE order_id= $order_id;";
 
-                $sql2 = "UPDATE " . DB_PREFIX . "order_total SET title = '" . $delivery_methodName . "' WHERE order_id= $order_id AND code = 'shipping';";
+                $sql2 = "UPDATE `" . DB_PREFIX . "order_total` SET title = '" . $delivery_methodName . "' WHERE order_id= $order_id AND code = 'shipping';";
                 $this->db->query($sql);
                 $this->db->query($sql2);
             } else {
-                $sql = "UPDATE " . DB_PREFIX . "order SET labelsCount = $labelsCount ,
+                $sql = "UPDATE `" . DB_PREFIX . "order` SET labelsCount = $labelsCount ,
                                                 omnivaWeight = $omnivaWeight ,
                                                 shipping_code = '" . $delivery_method . "' ,
                                                 shipping_method = '" . $delivery_methodName . "',
                                                 cod_amount = 888888
                                                 WHERE order_id= $order_id;";
 
-                $sql2 = "UPDATE " . DB_PREFIX . "order_total SET title = '" . $delivery_methodName . "' WHERE order_id= $order_id AND code = 'shipping';";
+                $sql2 = "UPDATE `" . DB_PREFIX . "order_total` SET title = '" . $delivery_methodName . "' WHERE order_id= $order_id AND code = 'shipping';";
                 $this->db->query($sql);
                 $this->db->query($sql2);
             }
