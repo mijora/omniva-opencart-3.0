@@ -57,33 +57,64 @@ class ModelExtensionShippingOmnivalt extends Model
 
         $title = $this->language->get('text_' . $service_Active);
         $codeCarrier = "omnivalt";
-        if ($service_Active == "parcel_terminal") {
-          $codeCarrier = 'fake';
-        }
-        if ($codeCarrier == 'fake') {
-          $cabins = $this->loadTerminals();
-          $terminals = $this->groupTerminals($cabins, $address['iso_code_2']);
-        } else { // courier doesnt need terminals
-          $terminals = null;
-        }
-
-        $quote_data[$service_Active] = array(
-          'code' => $codeCarrier . '.' . $service_Active,
-          'title' => $title,
-          'head' => $title,
-          'terminals' => $terminals,
-          'cost' => $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency')),
-          'tax_class_id' => 0,
-          'sort_order' => $this->config->get('shipping_omnivalt_sort_order'),
-          'text' => $this->currency->format(
-            $this->currency->convert(
-              $price,
-              $currency_carrier,
+        $tax_class_id = $this->config->get('shipping_omnivalt_tax_class_id');
+        switch ($service_Active) {
+          case 'parcel_terminal':
+            $cabins = $this->loadTerminals();
+            $terminals = $this->groupTerminals($cabins, $address['iso_code_2']);
+            $cost = $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency'));
+            $sort_order = $this->config->get('shipping_omnivalt_sort_order');
+            $text = $this->currency->format(
+              $this->tax->calculate(
+                $this->currency->convert($price, $currency_carrier, $this->session->data['currency']),
+                $tax_class_id,
+                $this->config->get('config_tax')
+              ),
               $this->session->data['currency']
-            ),
-            $this->session->data['currency']
-          ),
-        );
+            );
+            // create quote for each terminal
+            foreach ($terminals as $code => $terminal) {
+              $quote_data[$service_Active . "_$code"] = array(
+                'code' => $codeCarrier . '.' . $service_Active . "_$code",
+                'title' => $terminal,
+                'head' => $title,
+                'cost' => $cost,
+                'tax_class_id' => $tax_class_id,
+                'sort_order' => $sort_order,
+                'text' => $text,
+              );
+            }
+            // fake quote for ease of use in checkout
+            $quote_data[$service_Active] = array(
+              'code' => 'fake.' . $service_Active,
+              //'terminals' => $terminals,
+              'title' => $title,
+              'head' => $title,
+              'cost' => $cost,
+              'tax_class_id' => $tax_class_id,
+              'sort_order' => $sort_order,
+              'text' => $text,
+            );
+            break;
+          case 'courier':
+            $quote_data[$service_Active] = array(
+              'code' => $codeCarrier . '.' . $service_Active,
+              'title' => $title,
+              'head' => $title,
+              'cost' => $this->currency->convert($price, $currency_carrier, $this->config->get('config_currency')),
+              'tax_class_id' => $tax_class_id,
+              'sort_order' => $this->config->get('shipping_omnivalt_sort_order'),
+              'text' => $this->currency->format(
+                $this->tax->calculate(
+                  $this->currency->convert($price, $currency_carrier, $this->session->data['currency']),
+                  $tax_class_id,
+                  $this->config->get('config_tax')
+                ),
+                $this->session->data['currency']
+              ),
+            );
+            break;
+        }
       }
 
       if (!(isset($quote_data)) || !is_array($quote_data)) {
