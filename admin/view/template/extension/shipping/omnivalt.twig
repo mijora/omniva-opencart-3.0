@@ -272,6 +272,17 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-tax-class-id">{{ entry_tax_class }}</label>
+            <div class="col-sm-10">
+              <select name="shipping_omnivalt_tax_class_id" id="input-tax-class-id" class="form-control">
+                <option value="0" selected="selected">No tax zone</option>
+                {% for tax_class in tax_classes %}
+                  <option value="{{ tax_class['tax_class_id'] }}" {% if tax_class['tax_class_id'] == shipping_omnivalt_tax_class_id %} selected="selected" {% endif %}>{{ tax_class['title'] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
                     <label class="col-sm-2 control-label" for="terminals">{{ entry_terminals }}</label>
                     <div class="col-sm-10" id="terminals">
                         {{ terminal_count }}
@@ -283,26 +294,6 @@
                     <a href="{{ HTTPS_CATALOG }}index.php?route=extension/module/omnivalt"/>{{ HTTPS_CATALOG }}index.php?route=extension/module/omnivalt</a><br />
                     </div>
           </div>
-          <!-- Field for email templates -->
-            <div class="form-group">
-                    <label class="col-sm-2 control-label" for="terminals">{{ text_email_templates_head }} <Br />
-                    {{ text_enabled_disabled }}
-                    <input 
-                    {% if shipping_omnivalt_enable_templates == 'on' %}  'checked' {% endif %}
-                    type="checkbox"
-                    name="shipping_omnivalt_enable_templates">
-                    <Br />{{ text_email_templates }}
-                    </label>
-                    <div class="col-sm-10" id="terminals">
-                      <textarea 
-                      class="form-control" rows="5" 
-                      name="shipping_omnivalt_email_template"
-                      placeholder="Text to send then parcel is sent.">
-                      {{ shipping_omnivalt_email_template }}
-                      </textarea>
-                    </div>
-                  </div>
-            <!--/ Field for email templates -->
         </form>
       </div>
     </div>

@@ -53,7 +53,14 @@ class ControllerExtensionShippingOmnivalt extends Controller
             }
         }
 
-        foreach (array('cron_url', 'heading_title', 'text_edit', 'text_enabled', 'text_disabled', 'text_yes', 'text_no', 'text_none', 'text_parcel_terminal', 'text_courier', 'text_sorting_center', 'entry_url', 'entry_user', 'entry_password', 'entry_service', 'entry_pickup_type', 'entry_company', 'entry_bankaccount', 'entry_pickupstart', 'entry_pickupfinish', 'entry_cod', 'entry_status', 'entry_sort_order', 'entry_parcel_terminal_price', 'entry_courier_price', 'entry_terminals', 'button_save', 'button_cancel', 'button_download', 'entry_sender_name', 'entry_sender_address', 'entry_sender_city', 'entry_sender_postcode', 'entry_sender_phone', 'entry_sender_country_code') as $key) {
+        foreach (array('cron_url', 'heading_title', 'text_edit', 'text_enabled', 'text_disabled', 'text_yes',
+            'text_no', 'text_none', 'text_parcel_terminal', 'text_courier', 'text_sorting_center', 'entry_url',
+            'entry_user', 'entry_password', 'entry_service', 'entry_pickup_type', 'entry_company',
+            'entry_bankaccount', 'entry_pickupstart', 'entry_pickupfinish', 'entry_cod', 'entry_status', 
+            'entry_sort_order', 'entry_parcel_terminal_price', 'entry_courier_price', 'entry_terminals', 
+            'button_save', 'button_cancel', 'button_download', 'entry_sender_name', 'entry_sender_address', 
+            'entry_sender_city', 'entry_sender_postcode', 'entry_sender_phone', 'entry_sender_country_code',
+            'entry_tax_class') as $key) {
             $data[$key] = $this->language->get($key);
         }
 
@@ -250,6 +257,17 @@ class ControllerExtensionShippingOmnivalt extends Controller
             $data['shipping_omnivalt_enable_templates'] = $this->request->post['shipping_omnivalt_enable_templates'];
         } else {
             $data['shipping_omnivalt_enable_templates'] = $this->config->get('shipping_omnivalt_enable_templates');
+        }
+
+        // Get all tax classes information
+        $this->load->model('localisation/tax_class');
+        $data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
+
+        if (isset($this->request->post['shipping_omnivalt_tax_class_id'])) {
+            $data['shipping_omnivalt_tax_class_id'] = $this->request->post['shipping_omnivalt_tax_class_id'];
+        }
+        else {
+            $data['shipping_omnivalt_tax_class_id'] = $this->config->get('shipping_omnivalt_tax_class_id');
         }
 
         $data['header'] = $this->load->controller('common/header');
