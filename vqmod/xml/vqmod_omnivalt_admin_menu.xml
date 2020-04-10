@@ -6,7 +6,7 @@
     <author></author>
     <file path="admin/controller/common/column_left.php">
      <operation>
-        <search><![CDATA[if ($marketplace) {	]]></search>
+        <search><![CDATA[if ($marketplace) {]]></search>
             <add position="before"><![CDATA[   
             $omniva = array();
             $this->load->language('extension/shipping/omnivalt');                 
